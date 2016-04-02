@@ -9,8 +9,13 @@
 #include "zend_extensions.h"
 
 void statement_handler(zend_op_array *op_array) {
+    //TSRMLS_FETCH();
+    //fprintf(stderr, "%s:%d\n", zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
+}
+
+void function_start_handler(zend_op_array *op_array) {
     TSRMLS_FETCH();
-    fprintf(stderr, "%s:%d\n", zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
+    fprintf(stderr, "%s - %s:%d\n", get_active_function_name(TSRMLS_C), zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
 }
 
 int call_coverage_zend_startup(zend_extension *extension) {
@@ -37,7 +42,7 @@ ZEND_DLEXPORT zend_extension zend_extension_entry = {
         NULL,
         NULL,
         statement_handler,
-        NULL,
+        function_start_handler,
         NULL,
         NULL,
         NULL,
