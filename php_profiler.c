@@ -15,9 +15,13 @@ void statement_handler(zend_op_array *op_array) {
 
 void function_start_handler(zend_op_array *op_array) {
     TSRMLS_FETCH();
-    fprintf(stderr, "%s - %s:%d\n", get_active_function_name(TSRMLS_C), zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
+    fprintf(stderr, "Starting %s - %s:%d\n", get_active_function_name(TSRMLS_C), zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
 }
 
+void function_end_handler(zend_op_array *op_array) {
+    TSRMLS_FETCH();
+    fprintf(stderr, "Leaving %s - %s:%d\n", get_active_function_name(TSRMLS_C), zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
+}
 int call_coverage_zend_startup(zend_extension *extension) {
     TSRMLS_FETCH();
     CG(compiler_options) |= ZEND_COMPILE_EXTENDED_INFO;
@@ -43,7 +47,7 @@ ZEND_DLEXPORT zend_extension zend_extension_entry = {
         NULL,
         statement_handler,
         function_start_handler,
-        NULL,
+        function_end_handler,
         NULL,
         NULL,
         STANDARD_ZEND_EXTENSION_PROPERTIES
