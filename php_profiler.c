@@ -6,7 +6,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "zend.h"
-#include "zend_extension.h"
+#include "zend_extensions.h"
 
 void statement_handler(zend_op_array *op_array) {
     fprintf(stderr, "%s:%d\n", zend_get_executed_filename(TSRMLS_C), zend_get_executed_lineno(TSRMLS_C));
