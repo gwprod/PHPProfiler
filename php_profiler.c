@@ -22,7 +22,7 @@ void activate_function(zend_extension *extension) {
 
     int sequence = 0;
     int retries_left = REQUEST_RETRIES;
-    while (retries_left && !zctx_interrupted) {
+    while (retries_left) {
         //  We send a request, then we work to get a reply
         char request [10];
         sprintf (request, "%d", ++sequence);

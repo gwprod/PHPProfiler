@@ -31,7 +31,7 @@ if test "$PHP_PROFILER" = "yes"; then
     AC_MSG_RESULT([found version $PHP_ZMQ_VERSION, under $PHP_ZMQ_PREFIX])
     PHP_ZMQ_LIBS=`$PKG_CONFIG libzmq --libs`
     PHP_ZMQ_CFLAGS=`$PKG_CONFIG libzmq --cflags`
-    PHP_CHECK_LIBRARY(libzmq, zctx_interrupted, [
+    PHP_CHECK_LIBRARY(libzmq, zctx_new, [
       PHP_EVAL_INCLINE($PHP_ZMQ_CFLAGS)
       PHP_EVAL_LIBLINE($PHP_ZMQ_LIBS, ZMQ_SHARED_LIBADD)
     ],[
