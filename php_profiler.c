@@ -9,6 +9,10 @@
 #include "zend_extensions.h"
 #include "czmq/include/czmq.h"
 
+#define REQUEST_TIMEOUT     2500    //  msecs, (> 1000!)
+#define REQUEST_RETRIES     3       //  Before we abandon
+#define SERVER_ENDPOINT     "tcp://localhost:5555"
+
 void activate_function(zend_extension *extension) {
     zctx_t *ctx = zctx_new ();
     printf ("I: connecting to server...\n");
