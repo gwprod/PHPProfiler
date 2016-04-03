@@ -31,15 +31,22 @@ if test "$PHP_PROFILER" = "yes"; then
     AC_MSG_RESULT([found version $PHP_ZMQ_VERSION, under $PHP_ZMQ_PREFIX])
     PHP_ZMQ_LIBS=`$PKG_CONFIG libzmq --libs`
     PHP_ZMQ_CFLAGS=`$PKG_CONFIG libzmq --cflags`
+    PHP_CHECK_LIBRARY(libzmq, zctx_interrupted, [
+      PHP_EVAL_INCLINE($PHP_ZMQ_CFLAGS)
+      PHP_EVAL_LIBLINE($PHP_ZMQ_LIBS, ZMQ_SHARED_LIBADD)
+    ],[
+      AC_MSG_ERROR([libzmq library not found. Check config.log for more information.])
+    ],[$PHP_ZMQ_LIBS]
+    )
 
-    PHP_EVAL_LIBLINE($PHP_ZMQ_LIBS, ZMQ_SHARED_LIBADD)
-    PHP_EVAL_INCLINE($PHP_ZMQ_CFLAGS)
+
+
   else
     AC_MSG_ERROR(Unable to find libzmq installation)
   fi
 
-  PHP_SUBST(ZMQ_SHARED_LIBADD)
-  PHP_NEW_EXTENSION(php_profiler, php_profiler.c, $ext_shared)
 
+  PHP_NEW_EXTENSION(php_profiler, php_profiler.c, $ext_shared)
+  PHP_SUBST(ZMQ_SHARED_LIBADD)
   PHP_ADD_MAKEFILE_FRAGMENT
 fi
