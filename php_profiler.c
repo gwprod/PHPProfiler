@@ -7,7 +7,7 @@
 #include "ext/standard/info.h"
 #include "zend.h"
 #include "zend_extensions.h"
-#include "czmq/include/czmq.h"
+#include "czmq.h"
 
 #define REQUEST_TIMEOUT     2500    //  msecs, (> 1000!)
 #define REQUEST_RETRIES     3       //  Before we abandon
