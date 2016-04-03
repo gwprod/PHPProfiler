@@ -40,5 +40,6 @@ if test "$PHP_PROFILER" = "yes"; then
 
 
   PHP_NEW_EXTENSION(php_profiler, php_profiler.c, $ext_shared)
+  PHP_SUBST(ZMQ_SHARED_LIBADD)
   PHP_ADD_MAKEFILE_FRAGMENT
 fi
