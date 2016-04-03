@@ -24,7 +24,7 @@ install_czmq() {
 }
 
 BUILD_DIR="/tmp"
-export CFLAGS="-Wall -Wextra -Wmissing-field-initializers -Wshadow -Wno-unused-parameter -ggdb3"
+export CFLAGS="-Wall -Wextra -Wmissing-field-initializers -Wno-unused-parameter -ggdb3"
 phpize
 install_czmq
 ./configure --with-zmq --with-czmq=/usr/lib/czmq
