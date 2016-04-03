@@ -7,6 +7,7 @@
 #include "ext/standard/info.h"
 #include "zend.h"
 #include "zend_extensions.h"
+#include "czmq/include/czmq.h"
 
 void statement_handler(zend_op_array *op_array) {
     //TSRMLS_FETCH();
