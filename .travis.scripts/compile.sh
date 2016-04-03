@@ -1,14 +1,4 @@
 #!/bin/bash
-BUILD_DIR="/tmp"
-export CFLAGS="-Wall -Wextra -Wdeclaration-after-statement -Wmissing-field-initializers -Wshadow -Wno-unused-parameter -ggdb3"
-phpize
-install_czmq
-./configure --with-zmq --with-czmq=/usr/lib/czmq
-make all install
-EXTENSIONDIR=`php -r 'echo ini_get("extension_dir");'`
-echo "zend_extension=${EXTENSIONDIR}/php_profiler.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-echo "zend_extension=${EXTENSIONDIR}/php_profiler.so" > /tmp/temp-php-config.ini
-cat /tmp/temp-php-config.ini
 
 install_czmq() {
     local version=$1
@@ -32,3 +22,15 @@ install_czmq() {
         make install
     popd
 }
+
+BUILD_DIR="/tmp"
+export CFLAGS="-Wall -Wextra -Wdeclaration-after-statement -Wmissing-field-initializers -Wshadow -Wno-unused-parameter -ggdb3"
+phpize
+install_czmq
+./configure --with-zmq --with-czmq=/usr/lib/czmq
+make all install
+EXTENSIONDIR=`php -r 'echo ini_get("extension_dir");'`
+echo "zend_extension=${EXTENSIONDIR}/php_profiler.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+echo "zend_extension=${EXTENSIONDIR}/php_profiler.so" > /tmp/temp-php-config.ini
+cat /tmp/temp-php-config.ini
+
