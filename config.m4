@@ -38,6 +38,7 @@ if test "$PHP_PROFILER" = "yes"; then
     AC_MSG_ERROR(Unable to find libzmq installation)
   fi
 
+
   PHP_NEW_EXTENSION(php_profiler, php_profiler.c, $ext_shared)
   PHP_ADD_MAKEFILE_FRAGMENT
 fi
